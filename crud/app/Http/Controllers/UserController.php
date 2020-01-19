@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UserController extends Controller
@@ -29,10 +31,23 @@ class UserController extends Controller
     public function store(Request $request){
     	//$users = User::firstOrCreate($request->all());
 
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:App\User'],
+            'password' => ['required', 'string', 'min:8']
+        ]);
+        // $validatedData = Validator::make($request->all(), [
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // ]);
+
+        
+
     	$user = new User();
     	$user->name = $request->name;
     	$user->email = $request->email;
-    	$user->password = $request->password;
+    	$user->password = Hash::make($request->password);
     	$user->save();
 
     	
@@ -42,6 +57,11 @@ class UserController extends Controller
 
     public function update(Request $request,$id){
     	$user = User::findOrFail($id);
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:App\User'],
+            'password' => ['required', 'string', 'min:8']
+        ]);
     	$user->name = $request->name;
     	$user->email = $request->email;
     	$user->password = $request->password;
@@ -56,4 +76,13 @@ class UserController extends Controller
     	return redirect()->route('users.index');
 
     }
+
+
+    // protected function create(array $data){
+    //     return User::create([
+    //         'name' => $data['name'],
+    //         'email' => $data['email'],
+    //         'password' => Hash::make($data['password']),
+    //     ]);
+    // }
 }
