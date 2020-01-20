@@ -1,10 +1,10 @@
-@extends('user.layouts.app')
+@extends('user.layouts.master')
 
 @section('title','MyApp | Show')
 
 
 @section('content')
-<div class="row">
+<div class="container">
 	<h1>User Details</h1>
 	<p>Id : {{$user->id}}</p> 
 	<p>Email : {{$user->email}}</p>

@@ -1,11 +1,12 @@
-@extends('user.layouts.app')
+@extends('user.layouts.master')
 
 @section('title','MyApp | Index')
 
 
 @section('content')
-<div class="row">
+<div class="container">
 	<h1>All Users</h1>
+	
 	<table class="table">
 		<tr>
 			<th>SN</th>

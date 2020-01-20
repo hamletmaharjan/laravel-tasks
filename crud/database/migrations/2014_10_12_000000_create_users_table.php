@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            //$table->unsignedInteger('roles_id');
+            $table->enum('roles',['admin','superadmin']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->softDeletes();

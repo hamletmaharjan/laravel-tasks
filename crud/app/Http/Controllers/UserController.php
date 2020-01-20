@@ -48,6 +48,7 @@ class UserController extends Controller
     	$user->name = $request->name;
     	$user->email = $request->email;
     	$user->password = Hash::make($request->password);
+        $user->roles = $request->roles;
     	$user->save();
 
     	
@@ -65,6 +66,7 @@ class UserController extends Controller
     	$user->name = $request->name;
     	$user->email = $request->email;
     	$user->password = $request->password;
+        $user->roles = $request->roles;
     	$user->save();
     	return redirect()->route('users.index');
     }

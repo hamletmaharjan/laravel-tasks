@@ -1,10 +1,10 @@
-@extends('user.layouts.app')
+@extends('user.layouts.master')
 
 @section('title','MyApp | Edit')
 
 
 @section('content')
-<div class="row">
+<div class="container">
 	<form method="POST" action="{{route('users.update',['id'=> $user->id])}}">
 		@csrf
 		@method('PUT')

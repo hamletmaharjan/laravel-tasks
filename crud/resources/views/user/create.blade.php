@@ -1,10 +1,10 @@
-@extends('user.layouts.app')
+@extends('user.layouts.master')
 
 @section('title','MyApp | Create')
 
 
 @section('content')
-<div class="row">
+<div class="container">
 	<!-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -35,6 +35,16 @@
 		    <input type="password" class="form-control" id="pwd" name="password">
 		</div>
 		@error('password')
+		    <div class="alert alert-danger">{{ $message }}</div>
+		@enderror
+		<div class="form-group">
+		  <label for="sel1">Role</label>
+		  <select class="form-control" id="roles" name="roles">
+		    <option value="admin">admin</option>
+		    <option value="superadmin">superadmin</option>
+		  </select>
+		</div>
+		@error('roles')
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
 		<div class="checkbox">
