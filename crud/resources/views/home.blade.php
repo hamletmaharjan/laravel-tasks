@@ -23,6 +23,15 @@
                     @endif
 
                     You are logged in!
+
+                    <p> Last Login </p>
+                    <!-- {{\Carbon\Carbon::now()->diffForHumans(Auth::user()->last_login_at)}} -->
+
+                    @if (session('time'))
+                        
+                            {{ session('time') }}
+                        
+                    @endif
                 </div>
 
             </div>
