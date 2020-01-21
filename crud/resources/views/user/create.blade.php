@@ -18,21 +18,21 @@
 		@csrf
 		<div class="form-group">
 		   	<label for="name">Name:</label>
-		  	<input type="text" class="form-control" id="name" name="name">
+		  	<input type="text" class="form-control" id="name" name="name" value="{{old('name')}}" required>
 		</div>
 		@error('name')
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
 		<div class="form-group">
 		   	<label for="email">Email address:</label>
-		  	<input type="email" class="form-control" id="email" name="email">
+		  	<input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" required>
 		</div>
 		@error('email')
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
 		<div class="form-group">
 		   	<label for="pwd">Password:</label>
-		    <input type="password" class="form-control" id="pwd" name="password">
+		    <input type="password" class="form-control" id="pwd" name="password" value="{{old('password')}}" required>
 		</div>
 		@error('password')
 		    <div class="alert alert-danger">{{ $message }}</div>

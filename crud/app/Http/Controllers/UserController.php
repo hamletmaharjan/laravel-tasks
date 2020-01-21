@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class UserController extends Controller
@@ -77,6 +78,37 @@ class UserController extends Controller
     	$user->delete();
     	return redirect()->route('users.index');
 
+    }
+
+    public function showSettings(){
+        return view('user.settings');
+    }
+
+    public function showChangePasswordForm(){
+        return view('user.auth.changepassword');
+    }
+
+    public function changePassword(Request $request){
+        if (Hash::check($request->old_password, Auth::user()->password)) {
+            
+            $request->validate([
+                'password' => ['required', 'string', 'min:8'],
+                'confirm_password' => ['same:password']
+            ]);
+
+            if(Hash::check($request->password,Auth::user()->password)){
+                return redirect()->route('users.password')->with('error','new password cannot be same as old one');
+            }
+        
+            $user = User::findOrFail(Auth::user()->id);
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return redirect()->route('users.settings')->with('message','password changed');
+        }
+        else{
+            return redirect()->route('users.password')->with('error','invalid password');
+        }
+        
     }
 
 
