@@ -15,10 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
+
+
 Route::middleware('auth')->group(function(){
 	Route::get('/user/settings','UserController@showSettings')->name('users.settings');
 	Route::get('user/password','UserController@showChangePasswordForm')->name('users.password');
 	Route::post('user/changepassword','UserController@changePassword')->name('users.changepassword');
+	
+
+	Route::get('/user/avatar','HomeController@showUploadAvatarForm')->name('user.avatar');
+	Route::put('/user/uploadavatar','HomeController@UploadAvatar')->name('user.uploadavatar');
+	
+
 });
 
 Route::middleware(['adminpriv','auth'])->group(function(){

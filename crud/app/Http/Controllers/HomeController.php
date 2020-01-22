@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
 
 class HomeController extends Controller
 {
@@ -24,5 +25,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+
+    public function showUploadAvatarForm(){
+        return view('user.upload');
+    }
+
+    public function UploadAvatar(Request $request){
+        $manager = new ImageManager(array('driver' => 'imagick'));
+        $image = Image::make($request->file('avatar'))->resize(300, 200);
+        dd($request);
     }
 }

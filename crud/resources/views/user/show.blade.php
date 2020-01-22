@@ -8,11 +8,10 @@
 	<h1>User Details</h1>
 	<p>Id : {{$user->id}}</p> 
 	<p>Email : {{$user->email}}</p>
-	<p>Password : {{$user->password}}</p>
 	<p>Created At : {{$user->created_at}}</p>
-	
-</div>
-<div class="row">
+
+
+	<div class="row">
 	<a href="{{route('users.edit',['id' => $user->id ])}}">Edit</a>
 					<form method="POST" action="{{route('users.destroy',['id' => $user->id])}}">
 						@csrf
@@ -20,7 +19,10 @@
 						<button type="submit" onclick=" return confirm('you sure?')">Delete</button>
 					</form>
 			
+	</div>
+	
 </div>
+
 
 
 @endsection

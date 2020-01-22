@@ -111,6 +111,8 @@ class UserController extends Controller
         
     }
 
+    
+
 
     // protected function create(array $data){
     //     return User::create([
