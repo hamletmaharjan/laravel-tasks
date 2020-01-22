@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Intervention\Image\ImageManager;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -33,8 +35,16 @@ class HomeController extends Controller
     }
 
     public function UploadAvatar(Request $request){
-        $manager = new ImageManager(array('driver' => 'imagick'));
-        $image = Image::make($request->file('avatar'))->resize(300, 200);
-        dd($request);
+        $user = User::findOrFail(Auth::user()->id);
+        //$manager = new ImageManager(array('driver' => 'imagick'));
+        //$image = Image::make($request->file('avatar'))->resize(300, 200);
+        if($request->hasFile('avatar')){
+            $image = $request->file('avatar');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $avatar = Image::make($image)->resize(100,100);
+            $avatar->save(public_path('/images/avatar/'.$imageName));
+            $user->avatar = $imageName;
+        }
+        return 'done i guess';
     }
 }
