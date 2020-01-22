@@ -58,17 +58,24 @@ class UserController extends Controller
     }
 
     public function update(Request $request,$id){
+        
     	$user = User::findOrFail($id);
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:App\User'],
-            'password' => ['required', 'string', 'min:8']
+            'email' => ['required', 'string', 'email', 'max:255']
         ]);
     	$user->name = $request->name;
     	$user->email = $request->email;
-    	$user->password = $request->password;
+    	//$user->password = $request->password;
         $user->roles = $request->roles;
+        $user->gender = $request->gender;
+        $user->contact = $request->contact;
+        $user->date_of_birth = $request->date_of_birth;
+        $user->temp_address = $request->temp_address;
+        $user->perm_address = $request->perm_address;
     	$user->save();
+
+        
     	return redirect()->route('users.index');
     }
 
@@ -111,7 +118,7 @@ class UserController extends Controller
         
     }
 
-    
+
 
 
     // protected function create(array $data){

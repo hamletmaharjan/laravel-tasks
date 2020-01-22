@@ -15,6 +15,12 @@ class AddMoreToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('avatar', 100)->nullable();
+            $table->enum('gender',['male','female'])->nullable()->after('email');
+            $table->date('date_of_birth')->nullable();
+            $table->string('temp_address',50)->nullable();;
+            $table->string('perm_address',50)->nullable();;
+            $table->string('contact',15)->nullable();
+
         });
     }
 
@@ -27,6 +33,11 @@ class AddMoreToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('avatar');
+            $table->dropColumn('gender');
+            $table->dropColumn('date_of_birth');
+            $table->dropColumn('temp_address');
+            $table->dropColumn('perm_address');
+            $table->dropColumn('contact');
         });
     }
 }

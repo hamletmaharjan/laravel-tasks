@@ -46,7 +46,7 @@ class HomeController extends Controller
             $user->avatar = $imageName;
         }
         $user->save();
-        
-        return 'done i guess';
+
+        return redirect()->route('home');
     }
 }
