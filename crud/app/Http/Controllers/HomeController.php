@@ -45,6 +45,8 @@ class HomeController extends Controller
             $avatar->save(public_path('/images/avatar/'.$imageName));
             $user->avatar = $imageName;
         }
+        $user->save();
+        
         return 'done i guess';
     }
 }
