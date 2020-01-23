@@ -6,12 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserServices;
 use App\User;
 
 class UserController extends Controller
 {
+    protected $userServices;
+    public function __construct(UserServices $userServices){
+        $this->userServices = $userServices;
+    }
+
     public function index(){
-    	$users = User::get();
+    	//$users = User::get();
+        $users = $this->userServices->getAllUsers();
     	return view('user.index',compact('users'));
     }
 
@@ -20,7 +27,8 @@ class UserController extends Controller
     }
 
     public function show($id){
-    	$user = User::findOrFail($id);
+    	//$user = User::findOrFail($id);
+        $user = $this->userServices->getUserById($id);
     	return view('user.show',compact('user'));
     }
 
@@ -35,7 +43,8 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:App\User'],
-            'password' => ['required', 'string', 'min:8']
+            'password' => ['required', 'string', 'min:8'],
+            'contact' => ['required','max:15']
         ]);
         // $validatedData = Validator::make($request->all(), [
         //     'name' => ['required', 'string', 'max:255'],
@@ -50,6 +59,11 @@ class UserController extends Controller
     	$user->email = $request->email;
     	$user->password = Hash::make($request->password);
         $user->roles = $request->roles;
+        $user->gender = $request->gender;
+        $user->contact = $request->contact;
+        $user->date_of_birth = $request->date_of_birth;
+        $user->temp_address = $request->temp_address;
+        $user->perm_address = $request->perm_address;
     	$user->save();
 
     	

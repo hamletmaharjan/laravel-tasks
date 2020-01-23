@@ -41,10 +41,16 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
+                            <a class="nav-link" href="{{route('users.index')}}">Users</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{route('users.create')}}">Create</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('users.settings')}}">Setting</a>
+                            <a class="nav-link" href="{{route('post.create')}}">Upload</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('users.settings')}}">Settings</a>
                         </li>
                         @guest
                             <li class="nav-item">
@@ -89,5 +95,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('scripts')
 </body>
 </html>

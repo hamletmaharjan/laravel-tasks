@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
@@ -28,8 +28,15 @@ Route::middleware('auth')->group(function(){
 
 	Route::get('/user/avatar','HomeController@showUploadAvatarForm')->name('user.avatar');
 	Route::put('/user/uploadavatar','HomeController@UploadAvatar')->name('user.uploadavatar');
+
+	Route::get('/post/create','PostController@create')->name('post.create');
+	Route::post('/post','PostController@store')->name('post.store');
 	
 
+});
+
+Route::name('user')->group(function(){
+	Route::get('/','PostController@index')->name('index');
 });
 
 Route::middleware(['adminpriv','auth'])->group(function(){
