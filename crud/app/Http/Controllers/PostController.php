@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\PostServices;
 use Intervention\Image\Facades\Image;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -23,21 +24,27 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
+    	//dd($request);
     	$request->validate([
             'title' => ['required', 'string', 'max:30'],
             'description' => ['required', 'string', 'max:255'],
-            'photo' => ['required'],
+            'photo' => ['required']
         ]);
+
+    	$post = new Post();
+    	$post->title = $request->title;
+    	$post->description = $request->description;
+    	$post->user_id = $request->user_id;
+
         if($request->hasFile('photo')){
             $image = $request->file('photo');
-            dd($image);
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            $avatar = Image::make($image)->resize(100,100);
-            $avatar->save(public_path('/images/avatar/'.$imageName));
-            $user->avatar = $imageName;
+            $image->move(public_path('/uploads/posts'),$imageName);
+            //$location = public_path('user/images/'.$imageName);
+            $post->photo = $imageName;
         }
-
-        $this->postServices->setPostData($request->all);
-        return 'stored i guess';
+        //dd($post);
+        $post->save();
+        return redirect()->route('index');
     }
 }

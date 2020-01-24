@@ -16,9 +16,11 @@
 // });
 
 
+Route::get('/','PostController@index')->name('index');
 
-
-
+// Route::name('user')->group(function(){
+// 	Route::get('/','PostController@index')->name('index');
+// });
 
 Route::middleware('auth')->group(function(){
 	Route::get('/user/settings','UserController@showSettings')->name('users.settings');
@@ -35,9 +37,7 @@ Route::middleware('auth')->group(function(){
 
 });
 
-Route::name('user')->group(function(){
-	Route::get('/','PostController@index')->name('index');
-});
+
 
 Route::middleware(['adminpriv','auth'])->group(function(){
 	// Route::get('/user/settings','UserController@showSettings')->name('users.settings');

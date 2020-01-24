@@ -42,7 +42,8 @@ class HomeController extends Controller
             $image = $request->file('avatar');
             $imageName = time().'.'.$image->getClientOriginalExtension();
             $avatar = Image::make($image)->resize(100,100);
-            $avatar->save(public_path('/images/avatar/'.$imageName));
+            $image->move(public_path('/uploads/user/image/avatar'),$imageName);
+            $avatar->save(public_path('/uploads/user/image/avatar/thumbnail/'.$imageName));
             $user->avatar = $imageName;
         }
         $user->save();

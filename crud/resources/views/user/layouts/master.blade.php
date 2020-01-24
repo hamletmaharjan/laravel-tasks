@@ -64,7 +64,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{asset('images/avatar/'.Auth::user()->avatar)}}" alt="avatar" style="
+                                    <img src="{{asset('/uploads/user/image/avatar/thumbnail/'.Auth::user()->avatar)}}" alt="avatar" style="
   vertical-align: middle;
   width: 30px;
   height: 30px;
