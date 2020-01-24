@@ -10,7 +10,7 @@
 	@foreach($posts as $post)
         <div class="panel panel-default">
             <div class="panel-heading"><h4><a class="black-h" href="/post/{{$post->id}}">{{$post->title}}</a></h4>
-                <a href="#">edit</a> <a href="#">delete</a>
+                <a href="{{route('post.edit',['id'=>$post->id])}}">edit</a> <a href="#">delete</a>
             </div>
             <div class="panel-body">
                 <!-- <img src="user/image/{{$post->image}}"> -->

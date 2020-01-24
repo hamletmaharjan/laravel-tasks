@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\PostServices;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
 use App\Post;
 
 class PostController extends Controller
@@ -46,5 +47,21 @@ class PostController extends Controller
         //dd($post);
         $post->save();
         return redirect()->route('index');
+    }
+
+    public function edit($id){
+    	$user = Auth::user();
+    	$post = Post::findOrFail($id);
+    	if ($user->can('update', $post)) {
+	      	return view('user.posts.edit',compact('post'));
+	    } else {
+	      	return 'Not Authorized';
+	    }
+    	//$post = $this->postServices->getById($id);
+    	
+    }
+
+    public function update(Request $request, $id){
+    	//
     }
 }
