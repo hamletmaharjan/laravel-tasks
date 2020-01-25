@@ -24,7 +24,7 @@ class AdminPrivilege
             }
         }
         //dd(Auth::user()->roles);
-        return redirect('home')->with('error','You are restricted');
+        return redirect('/')->with('error','You are restricted');
         
     }
 }

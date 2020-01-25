@@ -19,22 +19,22 @@ class UserController extends Controller
     public function index(){
     	//$users = User::get();
         $users = $this->userServices->getAllUsers();
-    	return view('user.index',compact('users'));
+    	return view('admin.users.index',compact('users'));
     }
 
     public function create(){
-    	return view('user.create');
+    	return view('admin.users.create');
     }
 
     public function show($id){
     	//$user = User::findOrFail($id);
         $user = $this->userServices->getUserById($id);
-    	return view('user.show',compact('user'));
+    	return view('admin.users.show',compact('user'));
     }
 
     public function edit($id){
     	$user = User::findOrFail($id);
-    	return view('user.edit',compact('user'));
+    	return view('admin.users.edit',compact('user'));
     }
 
     public function store(Request $request){
@@ -90,19 +90,23 @@ class UserController extends Controller
     	$user->save();
 
         
-    	return redirect()->route('users.index');
+    	return redirect()->route('admin.users.index');
     }
 
     public function destroy($id){
     	
     	$user = User::findOrFail($id);
     	$user->delete();
-    	return redirect()->route('users.index');
+    	return redirect()->route('admin.users.index');
 
     }
 
-    public function showSettings(){
+    public function showUserSettings(){
         return view('user.settings');
+    }
+
+    public function showAdminSettings(){
+        return view('admin.settings');
     }
 
     public function showChangePasswordForm(){

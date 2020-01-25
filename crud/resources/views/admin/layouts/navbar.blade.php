@@ -118,11 +118,17 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face5.jpg" alt="profile"/>
-              <span class="nav-profile-name">Louis Barnett</span>
+              @if(Auth::user()->avatar!=null)
+              
+              <img src="{{asset('/uploads/user/image/avatar/thumbnail/'.Auth::user()->avatar)}}" alt="profile">
+            @else
+            <img src="images/faces/face5.jpg" alt="profile"/>
+            
+            @endif
+              <span class="nav-profile-name">{{Auth::user()->name}}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="{{route('admin.settings')}}">
                 <i class="mdi mdi-settings text-primary"></i>
                 Settings
               </a>
