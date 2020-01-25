@@ -64,4 +64,15 @@ class PostController extends Controller
     public function update(Request $request, $id){
     	//
     }
+
+    public function delete($id){
+    	$user = Auth::user();
+    	$post = Post::findOrFail($id);
+    	if ($user->can('update', $post)) {
+	      	$post->delete();
+	      	return redirect()->route('index');
+	    } else {
+	      	return 'Not Authorized';
+	    }
+    }
 }

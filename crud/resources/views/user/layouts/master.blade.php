@@ -64,12 +64,21 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    @if(Auth::user()->avatar!=null)
                                     <img src="{{asset('/uploads/user/image/avatar/thumbnail/'.Auth::user()->avatar)}}" alt="avatar" style="
-  vertical-align: middle;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-">
+                                      vertical-align: middle;
+                                      width: 30px;
+                                      height: 30px;
+                                      border-radius: 50%;
+                                    ">
+                                    @else
+                                    <img src="{{asset('/uploads/user/image/avatar/default.png')}}" alt="avatar" style="
+                                      vertical-align: middle;
+                                      width: 30px;
+                                      height: 30px;
+                                      border-radius: 50%;
+                                    ">
+                                    @endif
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 

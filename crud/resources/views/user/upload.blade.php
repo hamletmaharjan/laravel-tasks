@@ -9,6 +9,7 @@
 @endsection
 
 
+
 @section('content')
 <div class="container">
 	<h1>Upload Your Avatar</h1>
