@@ -17,7 +17,7 @@ class AdminPrivilege
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            if(Auth::user()->roles == 'superadmin'){
+            if(Auth::user()->role->name == 'superadmin'|| Auth::user()->role->name == 'admin'){
                 //return Auth::user()->roles;
                 //dd(Auth::user()->roles);
                 return $next($request);

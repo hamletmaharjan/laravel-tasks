@@ -18,8 +18,15 @@ class UserController extends Controller
 
     public function index(){
     	//$users = User::get();
-        $users = $this->userServices->getAllUsers();
-    	return view('admin.users.index',compact('users'));
+        $user = Auth::user();
+        if ($user->can('viewAny',$user)) {
+            $users = $this->userServices->getAllUsers();
+            return view('admin.users.index',compact('users'));
+        } else {
+            return 'You No Authorized';
+        }
+     //    $users = $this->userServices->getAllUsers();
+    	// return view('admin.users.index',compact('users'));
     }
 
     public function create(){
