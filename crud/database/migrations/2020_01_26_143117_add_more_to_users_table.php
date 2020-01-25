@@ -20,6 +20,9 @@ class AddMoreToUsersTable extends Migration
             $table->string('temp_address',50)->nullable();;
             $table->string('perm_address',50)->nullable();;
             $table->string('contact',15)->nullable();
+            $table->unsignedBigInteger('role_id');
+
+            $table->foreign('role_id')->references('id')->on('roles');
 
         });
     }
