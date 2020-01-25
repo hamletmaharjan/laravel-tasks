@@ -15,6 +15,8 @@
 //     return view('welcome');
 // });
 
+Route::get('/admin/dashboard','DashboardController@index')->name('admin.dashboard');
+
 
 Route::get('/','PostController@index')->name('index');
 Route::get('/post/{id}','PostController@show')->name('post.show');
