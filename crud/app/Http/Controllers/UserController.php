@@ -123,7 +123,7 @@ class UserController extends Controller
     	
     	$user = User::findOrFail($id);
     	$user->delete();
-    	return redirect()->route('admin.users.index');
+    	return redirect()->route('users.index');
 
     }
 

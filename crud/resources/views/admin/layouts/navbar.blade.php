@@ -2,8 +2,8 @@
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-          <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo"/></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset('admin/images/logo.svg')}}" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('admin/images/logo-mini.svg')}}" alt="logo"/></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
           </button>
@@ -122,7 +122,7 @@
               
               <img src="{{asset('/uploads/user/image/avatar/thumbnail/'.Auth::user()->avatar)}}" alt="profile">
             @else
-            <img src="images/faces/face5.jpg" alt="profile"/>
+            <img src="{{asset('admin/images/faces/face5.jpg')}}" alt="profile"/>
             
             @endif
               <span class="nav-profile-name">{{Auth::user()->name}}</span>
@@ -132,10 +132,20 @@
                 <i class="mdi mdi-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <!-- <a class="dropdown-item">
                 <i class="mdi mdi-logout text-primary"></i>
                 Logout
-              </a>
+              </a> -->
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                <i class="mdi mdi-logout text-primary"></i>
+                                        {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+              
             </div>
           </li>
         </ul>
