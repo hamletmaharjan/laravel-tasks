@@ -24,6 +24,12 @@ class DashboardController extends Controller
     }
 
     public function setPermissions(Request $request){
-        dd($request);
+        
+        foreach ($request->permissions as $roleId => $permission) {
+        	$roles = Role::find($roleId);
+        	$roles->permissions()->sync($permission);
+        }
+        return 'done i guess';
+        
     }
 }
