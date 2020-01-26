@@ -34,7 +34,7 @@
 	  <!-- <div class="panel-body">{{$permission->name}}</div> -->
 	  <div class="modal-body">
 	  	<div class="checkbox">
-			  <label><input type="checkbox" name="permissions[{{$role->id}}][]" value="{{$permission->id}}">{{$permission->name}}</label>
+			  <label><input type="checkbox" name="permissions[{{$role->id}}][]" value="{{$permission->id}}" {{$role->permissions->contains('id',$permission->id) ? 'checked' : ''}}>{{$permission->name}}</label>
 		</div>
 	  </div>
 	  	
