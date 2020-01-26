@@ -11,11 +11,11 @@
 	<h1>Manage</h1>
 	<h2>Permission for roles</h2>
 
-	@foreach($roles as $role)
+	<!-- @foreach($roles as $role)
 	<div class="panel panel-default">
 	  <div class="panel-heading"><h3>{{$role->name}}</h3></div>
-	  @foreach($role->permissions  as $permission)
-	  <!-- <div class="panel-body">{{$permission->name}}</div> -->
+	  @foreach($permissions  as $permission)
+	  <div class="panel-body">{{$permission->name}}</div>
 	  <div class="form-group">
 	  	<div class="checkbox">
 			  <label><input type="checkbox" value="{{$permission->id}}">{{$permission->name}}</label>
@@ -24,7 +24,25 @@
 	  	
 	  @endforeach
 	</div>
+	@endforeach -->
+	<form method="POST" action="{{route('admin.setpermissions')}}">
+		@csrf
+	@foreach($roles as $role)
+	<div class="modal-content">
+	  <div class="modal-header"><h3>{{$role->name}}</h3></div>
+	  @foreach($permissions  as $permission)
+	  <!-- <div class="panel-body">{{$permission->name}}</div> -->
+	  <div class="modal-body">
+	  	<div class="checkbox">
+			  <label><input type="checkbox" name="permission[{{$role->id}}][{{$permission->id}}]" value="{{$permission->id}}">{{$permission->name}}</label>
+		</div>
+	  </div>
+	  	
+	  @endforeach
+	</div>
 	@endforeach
+	<button type="submit">Submit</button>
+	</form>
 	
 </div>
 @endsection

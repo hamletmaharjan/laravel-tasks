@@ -29,6 +29,7 @@ Route::middleware(['adminpriv','auth'])->prefix('/admin')->group(function(){
 	Route::delete('/user/{id}','UserController@destroy')->name('users.destroy');
 	Route::get('/settings','UserController@showAdminSettings')->name('admin.settings');
 	Route::get('/manage','DashboardController@manage')->name('admin.manage');
+	Route::post('/manage','DashboardController@setPermissions')->name('admin.setpermissions');
 });
 
 

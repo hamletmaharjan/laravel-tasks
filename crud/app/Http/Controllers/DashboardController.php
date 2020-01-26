@@ -16,9 +16,14 @@ class DashboardController extends Controller
     	return view('admin.auth.login');
     }
 
+    //show permissions for all roles
     public function manage(){
     	$roles = Role::all();
     	$permissions = Permission::all(); 
     	return view('admin.manage',compact('roles','permissions'));
+    }
+
+    public function setPermissions(Request $request){
+        dd($request);
     }
 }
