@@ -28,15 +28,24 @@
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
 		<div class="form-group">
-		  <label for="sel1">Role</label>
-		  <select class="form-control" id="roles" name="roles">
-		    <option value="admin">admin</option>
-		    <option value="superadmin">superadmin</option>
+		  <label for="role">Role</label>
+		  <select class="form-control" id="role_id" name="role_id">
+		    @foreach($roles as $role)
+		    <option value="{{$role->id}}">{{$role->name}}</option>
+		    @endforeach
 		  </select>
 		</div>
 		@error('roles')
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
+		<!-- <div class="form-group">
+			<label for="contact">Permissions:</label>
+			@foreach($permissions as $permission)
+			<div class="checkbox">
+			  <label><input type="checkbox" value="{{$permission->id}}">{{$permission->name}}</label>
+			</div>
+			@endforeach
+		</div> -->
 		<div class="form-group">
 		   	<label for="contact">Contact:</label>
 		  	<input type="text" class="form-control" id="contact" name="contact" value="{{old('contact')}}" required>

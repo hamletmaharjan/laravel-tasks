@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Services\UserServices;
 use App\User;
-
+use App\Role;
+use App\Permission;
 class UserController extends Controller
 {
     protected $userServices;
@@ -20,6 +21,7 @@ class UserController extends Controller
     	//$users = User::get();
         $user = Auth::user();
         if ($user->can('viewAny',$user)) {
+            //$roles = Role::all();
             $users = $this->userServices->getAllUsers();
             return view('admin.users.index',compact('users'));
         } else {
@@ -30,7 +32,16 @@ class UserController extends Controller
     }
 
     public function create(){
-    	return view('admin.users.create');
+        
+        $user = Auth::user();
+        if($user->can('create',$user)){
+            $roles = Role::all();
+            $permissions = Permission::all();
+            return view('admin.users.create',compact('roles','permissions'));
+        }
+    	else{
+            return 'You no Authorized';
+        }
     }
 
     public function show($id){
@@ -41,7 +52,15 @@ class UserController extends Controller
 
     public function edit($id){
     	$user = User::findOrFail($id);
-    	return view('admin.users.edit',compact('user'));
+        $authUser = Auth::user();
+        if($authUser->can('update',$authUser,$user)){
+            $roles = Role::all();
+            return view('admin.users.edit',compact('user','roles'));
+        }
+        else{
+            return 'You cannot update duh';
+        }
+        
     }
 
     public function store(Request $request){
@@ -65,7 +84,7 @@ class UserController extends Controller
     	$user->name = $request->name;
     	$user->email = $request->email;
     	$user->password = Hash::make($request->password);
-        $user->roles = $request->roles;
+        $user->role_id = $request->role_id;
         $user->gender = $request->gender;
         $user->contact = $request->contact;
         $user->date_of_birth = $request->date_of_birth;
@@ -88,7 +107,7 @@ class UserController extends Controller
     	$user->name = $request->name;
     	$user->email = $request->email;
     	//$user->password = $request->password;
-        $user->roles = $request->roles;
+        $user->role_id = $request->role_id;
         $user->gender = $request->gender;
         $user->contact = $request->contact;
         $user->date_of_birth = $request->date_of_birth;
@@ -97,7 +116,7 @@ class UserController extends Controller
     	$user->save();
 
         
-    	return redirect()->route('admin.users.index');
+    	return redirect()->route('users.index');
     }
 
     public function destroy($id){

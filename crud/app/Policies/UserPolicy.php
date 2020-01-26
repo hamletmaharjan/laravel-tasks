@@ -23,11 +23,27 @@ class UserPolicy
         // return $user->id === $post->user_id 
         //         ? Response::allow() : Response::deny('You do not own this post.');
        
-        return $user->hasAccess('view-users');
+        return $user->hasAccess('view users');
             
     }
 
     public function view(User $user){
-        return $user->hasAccess('show-user');
+        return $user->hasAccess('show user');
+    }
+
+    public function create(User $user){
+        return $user->hasAccess('create user');
+    }
+
+    
+
+    public function update(User $authUser, User $user){
+        if($authUser->hasAccess('update user') || ($authUser->id==$user->id)){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }

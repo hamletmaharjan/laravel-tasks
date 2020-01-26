@@ -28,10 +28,11 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="roles">Role</label>
-			<select class="form-control" id="roles" name="roles">
-			   	<option value="admin">Admin</option>
-			    <option value="superadmin">Super Admin</option>
+			<label for="role_id">Role</label>
+			<select class="form-control" id="role_id" name="role_id">
+				@foreach($roles as $role)
+			   	<option value="{{$role->id}}">{{$role->name}}</option>
+			   	@endforeach
 			</select>
 		</div>
 		<div class="form-group">

@@ -38,10 +38,11 @@
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
 		<div class="form-group">
-		  <label for="sel1">Role</label>
-		  <select class="form-control" id="roles" name="roles">
-		    <option value="admin">admin</option>
-		    <option value="superadmin">superadmin</option>
+		  <label for="roles">Role</label>
+		  <select class="form-control" id="role_id" name="role_id">
+		    @foreach($roles as $role)
+			   	<option value="{{$role->id}}">{{$role->name}}</option>
+			@endforeach
 		  </select>
 		</div>
 		@error('roles')

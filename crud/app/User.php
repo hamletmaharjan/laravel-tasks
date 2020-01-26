@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function hasAccess($permission){
         foreach ($this->role->permissions as $perm) {
-            if($perm->slug == $permission){
+            if($perm->name == $permission){
                 return true;
             }
         }
