@@ -46,8 +46,15 @@ class UserController extends Controller
 
     public function show($id){
     	//$user = User::findOrFail($id);
-        $user = $this->userServices->getUserById($id);
-    	return view('admin.users.show',compact('user'));
+        $user = Auth::user();
+        if($user->can('view',$user)){
+            $user = $this->userServices->getUserById($id);
+            return view('admin.users.show',compact('user'));
+        }
+        else{
+            return 'You no can view';
+        }
+        
     }
 
     public function edit($id){

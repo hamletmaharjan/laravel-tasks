@@ -53,11 +53,19 @@ class User extends Authenticatable
     // }
 
     public function hasAccess($permission){
-        foreach ($this->role->permissions as $perm) {
-            if($perm->name == $permission){
-                return true;
-            }
+        //dd($this->role->permissions);
+        if($this->role->permissions->contains('name',$permission)){
+            return true;
         }
-        return false;
+        else{
+            return false;
+        }
+
+        // foreach ($this->role->permissions as $perm) {
+        //     if($perm->name == $permission){
+        //         return true;
+        //     }
+        // }
+        // return false;
     }
 }

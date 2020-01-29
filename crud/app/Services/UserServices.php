@@ -29,4 +29,8 @@ class UserServices
 	public function updateUserData($data,$id){
 		//
 	}
+
+	public function getNewUsers(){
+		//return $this->user->where()
+	}
 }

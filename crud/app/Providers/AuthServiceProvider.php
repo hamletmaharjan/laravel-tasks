@@ -31,6 +31,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::define('manage-permissions', function ($user) {
+            return $user->role->name == 'superadmin';
+        });
+
         // Gate::define('view-users', function ($user) {
         //     if($user->hasAccess('view-post')){
         //         return true;
