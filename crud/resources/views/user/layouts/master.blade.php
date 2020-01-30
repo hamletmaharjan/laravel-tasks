@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @yield('jquery')
+    @yield('stylesheets')
 </head>
 <body>
     <div id="app">
@@ -46,6 +46,9 @@
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="{{route('users.create')}}">Create</a>
                         </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('todolist')}}">To Do List</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('post.create')}}">Upload</a>
                         </li>
@@ -105,5 +108,6 @@
         </main>
     </div>
     @yield('scripts')
+    @yield('jquery')
 </body>
 </html>

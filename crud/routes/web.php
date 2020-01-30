@@ -55,6 +55,8 @@ Route::middleware('auth')->group(function(){
 	Route::get('/post/{id}/edit','PostController@edit')->name('post.edit');
 	Route::put('/post/{id}','PostController@update')->name('post.update');
 	Route::delete('/post/{id}','PostController@destroy')->name('post.destroy');
+	Route::get('/todo','ToDoListController@index')->name('todolist');
+	Route::post('/todo','ToDoListController@ajaxStore')->name('storelist');
 	
 
 });
