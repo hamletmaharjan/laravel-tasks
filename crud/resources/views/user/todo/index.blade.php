@@ -103,7 +103,6 @@
             }
 
             window.updateList = function(id){
-                alert('crap');
 
                 $.ajax({
                     method:'POST',

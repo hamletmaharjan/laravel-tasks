@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Todo;
+use App\User;
 
 class ToDoListController extends Controller
 {
@@ -28,7 +30,9 @@ class ToDoListController extends Controller
     }
 
     public function getAllLists(){
-    	$lists = Todo::all();
+    	$user = Auth::user();
+    	$lists = $user->todos;
+    	//$lists = Todo::all();
     	// return view('user.todo.index',compact('lists'));
     	return response()->json(['lists'=>$lists]);
     }
@@ -41,7 +45,7 @@ class ToDoListController extends Controller
 
     public function updateList(Request $request){
     	$list=Todo::find($request->listid);
-    	if($list->completed=true){
+    	if($list->completed==true){
     		$list->completed = false;
     	}
     	else{
