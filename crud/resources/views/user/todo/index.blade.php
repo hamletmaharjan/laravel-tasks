@@ -16,45 +16,61 @@
 
 @section('content')
 <div class="container">
-  	<h1>To Do List</h1>
-  	<p id="shit">test</p>
-  	<p id="result">Result</p>
-  	<div>
-	  	<div class="form-group">
-	  		<input type="text" id="title" name="title" placeholder="Title...">
-	  		<span id="addlist" class="addBtn">Add</span>
-	  	</div>
-	  	<div class="form-check">
-		  <input class="form-check-input" type="checkbox" value="" id="title" name="title[]">
-		  <label class="form-check-label" for="defaultCheck1">
-		    Do A Task
-		  </label>
-		</div>
-	  	<!-- <div class="list-group">
-	  		<input type="checkbox" name="">
-	    	<a href="#" class="list-group-item active">First item</a>
-	    	<a href="#" class="list-group-item">Second item</a>
-	    	<a href="#" class="list-group-item">Third item</a>
-	  	</div> -->
-  	</div>
+
+	<!-- <button type="button" id="getTasks">Get Tasks</button> -->
+	<div id="mylist">
+		
+	</div>
+	<form method="POST">
+	  <input type="text" placeholder="E.g. Adopt an owl" name="list_title" id="addtitle">
+	  <button type="submit" id="addlist">Add</button>
+	</form>
+  	
 </div>
 @endsection
 
 @section('jquery')
 <script src="{{ asset('/js/jquery-3.4.1.min.js') }}"></script>
-    
-    <script>
+<script type="text/javascript">
+	
         $(document).ready(function(){
-           
-            $('#shit').click(function(){
-                $('#shit').hide();
-            });
-
-            $.ajaxSetup({
+        	$.ajaxSetup({
               headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
             });
+            function loadLists(){
+            	$.get("{{route('getlists')}}",function(data){
+        			var lists = data.lists;
+        			var output = '<ul>'
+        			lists.forEach(function(list){
+        				output += `<li>
+        				<input type="checkbox" id="checkbox-${list.id}" value="${list.id}"></input>
+        				<label>${list.title}</label></li>`
+        			});
+        			output += '</ul>';
+        			document.getElementById('mylist').innerHTML = output;
+        			console.log(data.lists);
+        		});
+            }
+            loadLists();
+        	// $('#getTasks').click(function(e){
+        	// 	$.get("{{route('getlists')}}",function(data){
+        	// 		var lists = data.lists;
+        	// 		var output = '<ul>'
+        	// 		lists.forEach(function(list){
+        	// 			output += `<li>
+        	// 			<input type="checkbox" id="checkbox-${list.id}" value="${list.id}"></input>
+        	// 			<label>${list.title}</label></li>`
+        	// 		});
+        	// 		output += '</ul>';
+        	// 		document.getElementById('mylist').innerHTML = output;
+        	// 		console.log(data.lists);
+        	// 	});
+        	// });
+        	
+
+            
 
             $("#addlist").click(function(e){
                 e.preventDefault();
@@ -64,17 +80,28 @@
                     method:'POST',
                     url:"{{ route('storelist') }}",
                     data:{
-                        title:$('#title').val(),
+                        title:$('#addtitle').val(),
                         userid:"{{Auth::user()->id}}"
                     },
                     success:function(data){
-                        console.log(data);
-                        $('#result').text(data);
+                        console.log(data.list.title);
+                       
+                       	loadLists();
+
+
+                        
                     }
                 });
             });
+
+            
             
             
         });
-    </script>
+
+  
+   
+
+</script>
+
 @endsection
