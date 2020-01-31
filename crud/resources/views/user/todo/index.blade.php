@@ -17,7 +17,7 @@
 @section('content')
 <div class="container">
 
-	<!-- <button type="button" id="getTasks">Get Tasks</button> -->
+	<h1>To Do Lists</h1>
 	<div id="mylist">
 		
 	</div>
@@ -46,7 +46,7 @@
         			var output = '<ul>'
         			lists.forEach(function(list){
         				output += `<li>
-        				<input type="checkbox" id="checkbox-${list.id}" value="${list.id}"></input>
+        				<input type="checkbox" id="checkbox-${list.id}" value="${list.id}" ${list.completed ? 'checked' : ''} onClick="updateList(${list.id})"></input>
         				<label><h3>${list.title}</h3></label>
         				<img src="{{asset('images/delete.png')}}" style="cursor: pointer;" width="20px" height="20px" name="deleteBtn" onClick="deleteList(${list.id})">
         				</li>`
@@ -57,23 +57,6 @@
         		});
             }
             loadLists();
-        	// $('#getTasks').click(function(e){
-        	// 	$.get("{{route('getlists')}}",function(data){
-        	// 		var lists = data.lists;
-        	// 		var output = '<ul>'
-        	// 		lists.forEach(function(list){
-        	// 			output += `<li>
-        	// 			<input type="checkbox" id="checkbox-${list.id}" value="${list.id}"></input>
-        	// 			<label>${list.title}</label></li>`
-        	// 		});
-        	// 		output += '</ul>';
-        	// 		document.getElementById('mylist').innerHTML = output;
-        	// 		console.log(data.lists);
-        	// 	});
-        	// });
-        	
-
-            
 
             $("#addlist").click(function(e){
                 e.preventDefault();
@@ -114,6 +97,24 @@
                         console.log(data);
                        
                        	loadLists();
+                        
+                    }
+                });
+            }
+
+            window.updateList = function(id){
+                alert('crap');
+
+                $.ajax({
+                    method:'POST',
+                    url:"{{ route('updatelist') }}",
+                    data:{
+                        listid:id
+                    },
+                    success:function(data){
+                        console.log(data);
+                       
+                       	loadLists();
 
 
                         
@@ -121,8 +122,6 @@
                 });
             }
 
-            
-            
             
         });
 

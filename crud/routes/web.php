@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function(){
 	Route::post('/todo','ToDoListController@ajaxStore')->name('storelist');
 	Route::get('/todo/lists','ToDoListController@getAllLists')->name('getlists');
 	Route::post('/todo/delete','ToDoListController@deleteList')->name('deletelist');
+	Route::post('/todo/update','ToDoListController@updateList')->name('updatelist');
 
 });
 

@@ -38,4 +38,16 @@ class ToDoListController extends Controller
     	$list->delete();
     	return response()->json(['success'=>'Deleted']);
     }
+
+    public function updateList(Request $request){
+    	$list=Todo::find($request->listid);
+    	if($list->completed=true){
+    		$list->completed = false;
+    	}
+    	else{
+    		$list->completed = true;
+    	}
+    	$list->save();
+    	return response()->json(['success'=>'Completed']);
+    }
 }
