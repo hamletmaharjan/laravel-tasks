@@ -32,4 +32,10 @@ class ToDoListController extends Controller
     	// return view('user.todo.index',compact('lists'));
     	return response()->json(['lists'=>$lists]);
     }
+
+    public function deleteList(Request $request){
+    	$list = Todo::find($request->listid);
+    	$list->delete();
+    	return response()->json(['success'=>'Deleted']);
+    }
 }

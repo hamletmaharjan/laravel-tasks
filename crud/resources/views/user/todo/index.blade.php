@@ -32,7 +32,8 @@
 @section('jquery')
 <script src="{{ asset('/js/jquery-3.4.1.min.js') }}"></script>
 <script type="text/javascript">
-	
+
+
         $(document).ready(function(){
         	$.ajaxSetup({
               headers: {
@@ -46,7 +47,9 @@
         			lists.forEach(function(list){
         				output += `<li>
         				<input type="checkbox" id="checkbox-${list.id}" value="${list.id}"></input>
-        				<label>${list.title}</label></li>`
+        				<label><h3>${list.title}</h3></label>
+        				<img src="{{asset('images/delete.png')}}" style="cursor: pointer;" width="20px" height="20px" name="deleteBtn" onClick="deleteList(${list.id})">
+        				</li>`
         			});
         			output += '</ul>';
         			document.getElementById('mylist').innerHTML = output;
@@ -94,12 +97,37 @@
                 });
             });
 
+            window.deleteList = function(id){
+            	$.ajaxSetup({
+	              headers: {
+	                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	              }
+	            });
+            	
+                $.ajax({
+                    method:'POST',
+                    url:"{{ route('deletelist') }}",
+                    data:{
+                        listid:id
+                    },
+                    success:function(data){
+                        console.log(data);
+                       
+                       	loadLists();
+
+
+                        
+                    }
+                });
+            }
+
             
             
             
         });
 
   
+
    
 
 </script>
