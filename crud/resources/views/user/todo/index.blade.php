@@ -47,7 +47,7 @@
         			lists.forEach(function(list){
         				output += `<li>
         				<input type="checkbox" id="checkbox-${list.id}" value="${list.id}" ${list.completed ? 'checked' : ''} onClick="updateList(${list.id})"></input>
-        				<label><h3>${list.title}</h3></label>
+        				<label><h3>${list.completed ? '<strike>'+list.title+'</strike>' : list.title} </h3></label>
         				<img src="{{asset('images/delete.png')}}" style="cursor: pointer;" width="20px" height="20px" name="deleteBtn" onClick="deleteList(${list.id})">
         				</li>`
         			});
