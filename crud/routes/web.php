@@ -31,7 +31,12 @@ Route::middleware(['adminpriv','auth'])->prefix('/admin')->group(function(){
 	Route::get('/manage','DashboardController@manage')->name('admin.manage');
 	Route::post('/manage','DashboardController@setPermissions')->name('admin.setpermissions');
 
+	Route::get('/task/assign','TaskController@showAssignView')->name('task.showview');
 	Route::get('/tasks','TaskController@index')->name('task.index');
+	Route::get('/task/create','TaskController@create')->name('task.create');
+	Route::post('/task','TaskController@store')->name('task.store');
+	Route::get('/task/{id}/edit','TaskController@edit')->name('task.edit');
+	Route::put('/task/{id}','TaskController@update')->name('task.update');
 });
 
 

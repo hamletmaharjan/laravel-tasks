@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Task;
 
 
@@ -16,5 +17,22 @@ class TaskServices{
 
 	public function getAllTasks(){
 		return $this->task->get();
+	}
+
+	public function storeTask($data){
+		$this->task->title = $data['title'];
+		$this->task->description = $data['description'];
+		return $this->task->save();
+	}
+
+	public function getTaskById($id){
+		return $this->task->where('id','=',$id)->first();
+	}
+
+	public function updateTask($data,$id){
+		$this->task->where('id','=',$id)->first();
+		$this->task->title = $data['title'];
+		$this->task->description = $data['description'];
+		return $this->task->save();
 	}
 }

@@ -16,26 +16,42 @@ class TaskController extends Controller
 	}
 
     public function index(){
-    	return view('admin.tasks.index');
+    	$tasks = $this->taskService->getAllTasks();
+    	return view('admin.tasks.index', compact('tasks'));
+    }
+
+    public function create(){
+    	return view('admin.tasks.create');
     }
 
     public function show($id){
     	//
     }
 
-    public function edit(){
-    	//
+    public function edit($id){
+    	$task = $this->taskService->getTaskById($id);
+    	return view('admin.tasks.edit', compact('task'));
     }
 
-    public function store(){
-
+    public function store(Request $request){
+    	$this->taskService->storeTask($request->all());
+    	return 'check db';
     }
 
-    public function update(){
-    	//
+    public function update(Request $request, $id){
+    	if($this->taskService->updateTask($request->all(),$id)){
+    		return redirect()->route('task.index');
+    	}
+    	else{
+    		return 'somethings wrong';
+    	}
     }
 
     public function destroy(){
 
+    }
+
+    public function showAssignView(){
+    	return view('admin.tasks.assign');
     }
 }
