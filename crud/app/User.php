@@ -72,4 +72,8 @@ class User extends Authenticatable
     public function todos(){
         return $this->hasMany(Todo::class,'user_id');
     }
+
+    public function tasks(){
+        return $this->belongsToMany(Task::class,'task_user');
+    }
 }

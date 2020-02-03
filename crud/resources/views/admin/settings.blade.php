@@ -18,7 +18,7 @@
 	  @if (Auth::user()->can('manage-permissions'))
 	  <li class="list-group-item"><a href="{{route('admin.manage')}}">Manage Permissions</a></li>
 	  @endif
-	  <li class="list-group-item">Vestibulum at eros</li>
+	  
 	</ul>
 	
 </div>

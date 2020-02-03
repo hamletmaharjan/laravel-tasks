@@ -35,6 +35,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role->name == 'superadmin';
         });
 
+        Gate::define('manage-tasks',function($user){
+            return $user->role->name == 'superadmin';
+        });
+
         // Gate::define('view-users', function ($user) {
         //     if($user->hasAccess('view-post')){
         //         return true;

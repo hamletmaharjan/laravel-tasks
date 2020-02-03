@@ -30,6 +30,8 @@ Route::middleware(['adminpriv','auth'])->prefix('/admin')->group(function(){
 	Route::get('/settings','UserController@showAdminSettings')->name('admin.settings');
 	Route::get('/manage','DashboardController@manage')->name('admin.manage');
 	Route::post('/manage','DashboardController@setPermissions')->name('admin.setpermissions');
+
+	Route::get('/tasks','TaskController@index')->name('task.index');
 });
 
 
@@ -55,6 +57,8 @@ Route::middleware('auth')->group(function(){
 	Route::get('/post/{id}/edit','PostController@edit')->name('post.edit');
 	Route::put('/post/{id}','PostController@update')->name('post.update');
 	Route::delete('/post/{id}','PostController@destroy')->name('post.destroy');
+
+
 	Route::get('/todo','ToDoListController@index')->name('todolist');
 	Route::post('/todo','ToDoListController@ajaxStore')->name('storelist');
 	Route::get('/todo/lists','ToDoListController@getAllLists')->name('getlists');
