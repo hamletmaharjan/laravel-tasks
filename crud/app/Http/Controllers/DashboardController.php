@@ -46,8 +46,8 @@ class DashboardController extends Controller
         // for ($i=1; $i<=$len $i++) {
             
         // }
-        dd($request);
-        return 'done i guess';
+        
+        return redirect()->route('admin.manage');
         
     }
 }
