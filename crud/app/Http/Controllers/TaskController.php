@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Services\TaskServices;
 use App\Task;
 
@@ -47,11 +48,31 @@ class TaskController extends Controller
     	}
     }
 
-    public function destroy(){
+    public function destroy($id){
+        if($this->taskService->deleteById($id)){
+            return redirect()->route('task.index');
+        }
+        else{
+            return 'could not delete';
+        }
 
     }
 
     public function showAssignView(){
     	return view('admin.tasks.assign');
+    }
+
+
+    //FrontEnd for ajax
+
+
+    public function showTasks(){
+        return view('user.tasks.index');
+    }
+
+    public function getTasks(){
+        $user = Auth::user();
+        $tasks = $user->tasks;
+        return response()->json(['tasks'=>$tasks]);
     }
 }

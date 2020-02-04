@@ -35,7 +35,14 @@
 	            	<td>{{$task->title}}</td>
 	            	<td>{{$task->description}}</td>
 	            	<td><label class="badge badge-danger">Pending</label></td>
-	            	<td><a href="{{route('task.edit',['id'=>$task->id])}}">edit</a> <a href="#">delete</a></td>
+	            	<td><a href="{{route('task.edit',['id'=>$task->id])}}">edit</a>
+	            		<form method="POST" action="{{route('task.destroy',['id'=>$task->id])}}">
+	            			@csrf
+	            			@method('DELETE')
+	            			<button type="submit" onclick="return confirm('you sure?')">Delete</button>
+	            			
+	            		</form>
+	            	</td>
 	            </tr>
 	            @endforeach
 	            

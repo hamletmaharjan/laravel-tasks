@@ -47,6 +47,9 @@
                             <a class="nav-link" href="{{route('users.create')}}">Create</a>
                         </li> -->
                         <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.task.index')}}">Tasks</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{route('todolist')}}">To Do List</a>
                         </li>
                         <li class="nav-item">

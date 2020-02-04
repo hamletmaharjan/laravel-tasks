@@ -30,9 +30,14 @@ class TaskServices{
 	}
 
 	public function updateTask($data,$id){
-		$this->task->where('id','=',$id)->first();
+		$this->task = $this->task->where('id','=',$id)->first();
 		$this->task->title = $data['title'];
 		$this->task->description = $data['description'];
 		return $this->task->save();
+	}
+
+	public function deleteById($id){
+		$this->task = $this->task->where('id','=',$id)->first();
+		return $this->task->delete();
 	}
 }
