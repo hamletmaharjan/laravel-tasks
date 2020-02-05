@@ -73,7 +73,14 @@ class TaskController extends Controller
     public function assignTask(Request $request){
         
         $user = User::find($request->user_id);
-        $user->tasks()->attach($request->task_id);
+        $t = $user->tasks->where('id','=',$request->taskid)->first();
+        if($t!=null){
+            $user->tasks()->attach($request->task_id);
+        }
+        else{
+            return 'task already assigned';
+        }
+        
         return 'done i guess';
         
         
@@ -84,8 +91,6 @@ class TaskController extends Controller
 
 
     //FrontEnd for ajax
-
-
     public function showTasks(){
         return view('user.tasks.index');
     }
