@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\TaskServices;
 use App\Task;
+use App\User;
+use App\Role;
 
 
 class TaskController extends Controller
@@ -59,8 +61,26 @@ class TaskController extends Controller
     }
 
     public function showAssignView(){
-    	return view('admin.tasks.assign');
+        $users = User::whereHas(
+            'role', function($q){
+                $q->where('name', 'user');
+            }
+        )->get();
+        $tasks = Task::all();
+    	return view('admin.tasks.assign',compact('users','tasks'));
     }
+
+    public function assignTask(Request $request){
+        
+        $user = User::find($request->user_id);
+        $user->tasks()->attach($request->task_id);
+        return 'done i guess';
+        
+        
+    }
+
+
+
 
 
     //FrontEnd for ajax

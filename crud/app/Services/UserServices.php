@@ -33,4 +33,8 @@ class UserServices
 	public function getNewUsers(){
 		//return $this->user->where()
 	}
+
+	public function getUserByRole($role){
+		return $this->user->with('role')->where('name',$role);
+	}
 }
