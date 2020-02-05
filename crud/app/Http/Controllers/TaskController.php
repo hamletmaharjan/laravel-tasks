@@ -75,4 +75,17 @@ class TaskController extends Controller
         $tasks = $user->tasks;
         return response()->json(['tasks'=>$tasks]);
     }
+
+    public function updateTask(Request $request){
+
+        $user = Auth::user();
+        $t = $user->tasks->where('id','=',$request->taskid)->first();
+        if($t->pivot->completed){
+            $user->tasks()->updateExistingPivot($request->taskid,['completed'=>false]);
+        }
+        else{
+            $user->tasks()->updateExistingPivot($request->taskid,['completed'=>true]);
+        }
+        return response()->json(['status'=>'success']);
+    }
 }

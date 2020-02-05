@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function(){
 
 	Route::get('/tasks','TaskController@showTasks')->name('user.task.index');
 	Route::get('/tasks/all','TaskController@getTasks')->name('user.task.getall');
+	Route::post('/task/update','TaskController@updateTask')->name('user.task.update');
 
 });
 
