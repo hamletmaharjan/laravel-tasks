@@ -5,15 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Role;
 use App\Permission;
 use Carbon\Carbon;
+use App\User;
 
 class DashboardController extends Controller
 {
-    public function index(){
 
-        //dd(Carbon::now());
+    public function __construct(){
+        //
+    }
+
+    public function index(){
+        
+        $users = User::whereHas(
+            'role', function($q){
+                $q->where('name', 'user');
+            }
+        )->get();
+
+        if(Gate::allows('view-report')){
+            // foreach($users as $user){
+            //     //dd($user);
+            //     $total = 0;
+            //     $completed = 0;
+            //     foreach($user->tasks as $task){
+            //         $total++;
+            //         if($task->pivot->completed){
+            //             $completed++;
+            //         }
+            //     }
+            //     $
+            // }
+            
+            return view('admin.dashboard',compact('users'));
+        }
     	return view('admin.dashboard');
     }
 

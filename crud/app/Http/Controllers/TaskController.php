@@ -73,12 +73,14 @@ class TaskController extends Controller
     public function assignTask(Request $request){
         
         $user = User::find($request->user_id);
-        $t = $user->tasks->where('id','=',$request->taskid)->first();
+        $t = $user->tasks->where('id','=',$request->task_id)->first();
+
         if($t!=null){
-            $user->tasks()->attach($request->task_id);
+            return 'task already assigned';
+            
         }
         else{
-            return 'task already assigned';
+            $user->tasks()->attach($request->task_id);
         }
         
         return 'done i guess';
