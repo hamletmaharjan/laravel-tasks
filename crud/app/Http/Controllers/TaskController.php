@@ -92,6 +92,11 @@ class TaskController extends Controller
 
 
 
+
+
+
+
+
     //FrontEnd for ajax
     public function showTasks(){
         return view('user.tasks.index');
