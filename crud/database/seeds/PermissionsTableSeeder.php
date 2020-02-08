@@ -21,7 +21,7 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'create user',
             ],
             [
-                'slug' => 'show user',
+                'slug' => 'show-user',
                 'name' => 'show user',
             ]
             

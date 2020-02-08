@@ -25,19 +25,22 @@
                   Name
                 </th>
                 <th>
-                  Progress
+                  Task
                 </th>
                 <th>
-                  Total Tasks
+                  Assigned At
                 </th>
                 <th>
-                  Completed Tasks
+                  Due At
+                </th>
+                <th>
+                  Completed At
                 </th>
               </tr>
             </thead>
             <tbody>
               @foreach($users as $user)
-              @php
+              <!-- @php
                 $total = 0;
                 $completed = 0;
                 foreach($user->tasks as $task){
@@ -47,7 +50,8 @@
                   $total++;
                 }
                 $value = ($completed/$total)*100;
-              @endphp
+              @endphp -->
+              @foreach($user->tasks as $task)
               <tr>
                 <td class="py-1">
                   <img src="{{asset('/uploads/user/image/avatar/thumbnail/'.$user->avatar)}}" alt="image">
@@ -56,18 +60,29 @@
                   {{$user->name}}
                 </td>
                 <td>
-                  <progress id="progress" max="100" value="{{$value}}"></progress>
+                  {{$task->title}}
+                  <!-- <progress id="progress" max="100" value="{{$value}}"></progress> -->
                   <!-- <div class="progress">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                   </div> -->
                 </td>
                 <td>
-                  {{$total}}
+                  {{$task->pivot->assigned_at}}
                 </td>
                 <td>
-                  {{$completed}}
+                  {{$task->due_at}}
+                </td>
+                <td>
+                  @if($task->pivot->completed)
+                  {{$task->pivot->completed_at}}
+                  @else
+                  not completed
+                  @endif
                 </td>
               </tr>
+
+              @endforeach
+              
               @endforeach
             </tbody>
           </table>
