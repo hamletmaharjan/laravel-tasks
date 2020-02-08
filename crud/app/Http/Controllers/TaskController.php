@@ -8,6 +8,7 @@ use App\Services\TaskServices;
 use App\Task;
 use App\User;
 use App\Role;
+use Carbon\Carbon;
 
 
 class TaskController extends Controller
@@ -80,7 +81,7 @@ class TaskController extends Controller
             
         }
         else{
-            $user->tasks()->attach($request->task_id);
+            $user->tasks()->attach($request->task_id,['assigned_at'=>Carbon::now()]);
         }
         
         return 'done i guess';
@@ -113,10 +114,10 @@ class TaskController extends Controller
         $user = Auth::user();
         $t = $user->tasks->where('id','=',$request->taskid)->first();
         if($t->pivot->completed){
-            $user->tasks()->updateExistingPivot($request->taskid,['completed'=>false]);
+            $user->tasks()->updateExistingPivot($request->taskid,['completed'=>false,'completed_at'=>null]);
         }
         else{
-            $user->tasks()->updateExistingPivot($request->taskid,['completed'=>true]);
+            $user->tasks()->updateExistingPivot($request->taskid,['completed'=>true,'completed_at'=>Carbon::now()]);
         }
         return response()->json(['status'=>'success']);
     }

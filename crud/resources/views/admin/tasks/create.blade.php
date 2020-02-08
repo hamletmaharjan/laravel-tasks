@@ -22,6 +22,10 @@
               <label for="exampleInputEmail1">Description</label>
               <input type="text" class="form-control" name="description" placeholder="Description">
             </div>
+            <div class="form-group">
+              <label>Due Date</label>
+              <input type="date" name="due_at">
+            </div>
             <button type="submit" class="btn btn-primary mr-2">Submit</button>
             <button class="btn btn-light">Cancel</button>
           </form>

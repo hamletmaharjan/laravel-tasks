@@ -22,7 +22,7 @@ class RolesTableSeeder extends Seeder
                 'description' => 'assistant to the superadmin',
             ],
             [
-                'name' => 'superadmin',
+                'name' => 'user',
                 'description' => 'just a user',
             ]
             

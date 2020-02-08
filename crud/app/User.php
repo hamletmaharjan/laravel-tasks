@@ -74,6 +74,6 @@ class User extends Authenticatable
     }
 
     public function tasks(){
-        return $this->belongsToMany('App\Task')->withPivot('completed');
+        return $this->belongsToMany('App\Task')->withPivot('completed','assigned_at','completed_at');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Task;
+use Carbon\Carbon;
 
 
  
@@ -22,6 +23,7 @@ class TaskServices{
 	public function storeTask($data){
 		$this->task->title = $data['title'];
 		$this->task->description = $data['description'];
+		$this->task->due_at = $data['due_at'];
 		return $this->task->save();
 	}
 
