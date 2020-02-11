@@ -39,6 +39,10 @@ Route::middleware(['adminpriv','auth'])->prefix('/admin')->group(function(){
 	Route::put('/task/{id}','TaskController@update')->name('task.update');
 	Route::delete('/task/{id}','TaskController@destroy')->name('task.destroy');
 	Route::post('/task/assign','TaskController@assignTask')->name('task.assign');
+
+	Route::get('/taskgroups','TaskGroupController@index')->name('taskgroup.index');
+	Route::get('/taskgroup/create','TaskGroupController@create')->name('taskgroup.create');
+	Route::post('/taskgroup','TaskGroupController@store')->name('taskgroup.store');
 });
 
 

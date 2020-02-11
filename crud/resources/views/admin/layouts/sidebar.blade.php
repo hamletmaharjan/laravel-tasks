@@ -30,7 +30,8 @@
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{route('task.index')}}">Manage Tasks</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('task.create')}}">Create Tasks</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('taskgroup.index')}}">Manage Task Group</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('taskgroup.create')}}">Create Task Group</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('task.showview')}}">Assign Task</a></li>
               </ul>
             </div>

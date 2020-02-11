@@ -9,6 +9,7 @@ use App\Task;
 use App\User;
 use App\Role;
 use Carbon\Carbon;
+use App\TaskGroup;
 
 
 class TaskController extends Controller
@@ -20,8 +21,8 @@ class TaskController extends Controller
 	}
 
     public function index(){
-    	$tasks = $this->taskService->getAllTasks();
-    	return view('admin.tasks.index', compact('tasks'));
+    	//$tasks = $this->taskService->getAllTasks();
+    	return view('admin.tasks.index');
     }
 
     public function create(){
@@ -67,11 +68,13 @@ class TaskController extends Controller
                 $q->where('name', 'user');
             }
         )->get();
-        $tasks = Task::all();
-    	return view('admin.tasks.assign',compact('users','tasks'));
+        $taskgroups = TaskGroup::all();
+    	return view('admin.tasks.assign',compact('users','taskgroups'));
     }
 
     public function assignTask(Request $request){
+
+        dd($request);
         
         $user = User::find($request->user_id);
         $t = $user->tasks->where('id','=',$request->task_id)->first();
@@ -114,10 +117,10 @@ class TaskController extends Controller
         $user = Auth::user();
         $t = $user->tasks->where('id','=',$request->taskid)->first();
         if($t->pivot->completed){
-            $user->tasks()->updateExistingPivot($request->taskid,['completed'=>false,'completed_at'=>null]);
+            $user->tasks()->updateExistingPivot($request->taskid,['status'=>false,'completed_at'=>null]);
         }
         else{
-            $user->tasks()->updateExistingPivot($request->taskid,['completed'=>true,'completed_at'=>Carbon::now()]);
+            $user->tasks()->updateExistingPivot($request->taskid,['status'=>true,'completed_at'=>Carbon::now()]);
         }
         return response()->json(['status'=>'success']);
     }
