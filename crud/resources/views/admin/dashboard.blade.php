@@ -19,28 +19,41 @@
             <thead>
               <tr>
                 <th>
-                  User
-                </th>
-                <th>
-                  Name
+                  SN
                 </th>
                 <th>
                   Task Group
                 </th>
                 <th>
-                  Tasks
+                  Total Tasks
                 </th>
                 <th>
-                  Assigned At
+                  Completed Tasks
                 </th>
+                <th>Progress</th>
                 <th>
                   Due At
                 </th>
-                <th>
-                  Completed At
-                </th>
+                
               </tr>
             </thead>
+            <tbody>
+              @foreach($taskgroups as $taskgroup)
+              <tr>
+              <td>{{$loop->iteration}}</td>
+              <td>{{$taskgroup->title}}</td>
+              <td>{{$taskgroup->tasks->count()}}</td>
+              <td>{{$taskgroup->tasks->where('status',1)->count()}}</td>
+              <td>
+              @php
+              $value = (($taskgroup->tasks->where('status',1)->count())/($taskgroup->tasks->count()))*100;
+              @endphp
+              <progress id="file" max="100" value="{{$value}}">{{$value}}</progress>
+              </td>
+              <td>{{ \Carbon\Carbon::parse($taskgroup->due_at)->diffForHumans() }}</td>
+              </tr>
+              @endforeach
+            </tbody>
             
           </table>
         </div>

@@ -10,6 +10,7 @@ use App\Role;
 use App\Permission;
 use Carbon\Carbon;
 use App\User;
+use App\TaskGroup;
 
 class DashboardController extends Controller
 {
@@ -28,8 +29,8 @@ class DashboardController extends Controller
 
         if(Gate::allows('view-report')){
            
-            
-            return view('admin.dashboard',compact('users'));
+            $taskgroups = TaskGroup::all();
+            return view('admin.dashboard',compact('taskgroups'));
         }
     	return view('admin.dashboard');
     }
