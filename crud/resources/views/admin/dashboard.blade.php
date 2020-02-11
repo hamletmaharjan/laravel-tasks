@@ -41,60 +41,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody>
-              @foreach($users as $user)
-              <!-- @php
-                $total = 0;
-                $completed = 0;
-                foreach($user->tasks as $task){
-                  if($task->pivot->completed){
-                    $completed++;
-                  }
-                  $total++;
-                }
-                $value = ($completed/$total)*100;
-              @endphp -->
-              @foreach($user->tasks as $task)
-              <tr>
-                <td class="py-1">
-                  <img src="{{asset('/uploads/user/image/avatar/thumbnail/'.$user->avatar)}}" alt="image">
-                </td>
-                <td>
-                  {{$user->name}}
-                </td>
-                <td>
-                  {{$task->title}}
-                  <!-- <progress id="progress" max="100" value="{{$value}}"></progress> -->
-                  <!-- <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div> -->
-                </td>
-                <td>
-                  @foreach($task->taskitems as $items)
-                    {{$items->name}} <br>
-                  @endforeach
-                  
-                </td>
-                
-                <td>
-                  {{$task->pivot->assigned_at}}
-                </td>
-                <td>
-                  {{$task->due_at}}
-                </td>
-                <td>
-                  @if($task->pivot->completed)
-                  {{$task->pivot->completed_at}}
-                  @else
-                  not completed
-                  @endif
-                </td>
-              </tr>
-
-              @endforeach
-              
-              @endforeach
-            </tbody>
+            
           </table>
         </div>
       </div>

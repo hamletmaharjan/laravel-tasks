@@ -74,21 +74,12 @@ class TaskController extends Controller
 
     public function assignTask(Request $request){
 
-        dd($request);
-        
-        $user = User::find($request->user_id);
-        $t = $user->tasks->where('id','=',$request->task_id)->first();
-
-        if($t!=null){
-            return 'task already assigned';
-            
+        if($this->taskService->storeTask($request->all())){
+            return redirect()->route('task.index');
         }
         else{
-            $user->tasks()->attach($request->task_id,['assigned_at'=>Carbon::now()]);
+            return 'error';
         }
-        
-        return 'done i guess';
-        
         
     }
 

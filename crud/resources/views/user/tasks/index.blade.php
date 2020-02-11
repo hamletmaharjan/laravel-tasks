@@ -24,7 +24,7 @@ $(document).ready(function(){
     });
 
     function loadTasks(){
-        $.get("{{route('user.task.getall')}}",function(data){
+        $.get("{{route('user.taskgroup.getall')}}",function(data){
             console.log(data);
             var lists = data.tasks;
             var output = '<ul>'

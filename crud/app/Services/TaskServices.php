@@ -23,7 +23,9 @@ class TaskServices{
 	public function storeTask($data){
 		$this->task->title = $data['title'];
 		$this->task->description = $data['description'];
-		$this->task->due_at = $data['due_at'];
+		$this->task->user_id = $data['user_id'];
+		$this->task->task_group_id = $data['task_group_id'];
+		$this->task->assigned_at = Carbon::now();
 		return $this->task->save();
 	}
 

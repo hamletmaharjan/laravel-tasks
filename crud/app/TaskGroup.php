@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskGroup extends Model
 {
+    //
+
     public function tasks(){
-    	return $this->hasMany('App\Task');
+    	return $this->hasMany(Task::class);
     }
 }

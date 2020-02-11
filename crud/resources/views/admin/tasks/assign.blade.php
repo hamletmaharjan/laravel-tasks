@@ -33,7 +33,7 @@
             </div>
             <div class="input-group mb-2 mr-sm-2">
             	<label>Task</label>
-            	<input type="text" class="form-control" name="task" placeholder="E.g. Adopt an owl">
+            	<input type="text" class="form-control" name="title" placeholder="E.g. Adopt an owl">
             </div>
             <div class="input-group mb-2 mr-sm-2">
               <label>Description</label>
