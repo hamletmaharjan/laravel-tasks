@@ -12,6 +12,9 @@ class ToDoListController extends Controller
     public function index(){
     	
     	return view('user.todo.index');
+
+
+    	
     	
     }
 
