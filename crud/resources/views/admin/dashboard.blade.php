@@ -25,7 +25,10 @@
                   Name
                 </th>
                 <th>
-                  Task
+                  Task Group
+                </th>
+                <th>
+                  Tasks
                 </th>
                 <th>
                   Assigned At
@@ -66,6 +69,13 @@
                     <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                   </div> -->
                 </td>
+                <td>
+                  @foreach($task->taskitems as $items)
+                    {{$items->name}} <br>
+                  @endforeach
+                  
+                </td>
+                
                 <td>
                   {{$task->pivot->assigned_at}}
                 </td>
