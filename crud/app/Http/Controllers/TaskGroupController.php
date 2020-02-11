@@ -43,16 +43,10 @@ class TaskGroupController extends Controller
 
     //for ajax
     public function getAll(){
-    	$user = Auth::user();
-    	
-    	$taskGroups = TaskGroup::whereHas(
-            'tasks', function($q){
-                $q->where('user_id',$user->id);
-            }
-        )->get();
-        return $taskGroups;
+    	$taskgroups = TaskGroup::whereHas('tasks',function($q){$q->where('user_id',Auth::user()->id);})->get();
+        //return $taskgroups;
 
-        return response()->json(['taskgroups'=>$taskGroups]);
+        return response()->json(['taskgroups'=>$taskgroups]);
 
     }
 }

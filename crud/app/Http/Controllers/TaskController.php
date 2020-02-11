@@ -22,7 +22,7 @@ class TaskController extends Controller
 
     public function index(){
     	//$tasks = $this->taskService->getAllTasks();
-    	return view('admin.tasks.index');
+            return view('admin.tasks.index',);
     }
 
     public function create(){
@@ -94,7 +94,9 @@ class TaskController extends Controller
 
     //FrontEnd for ajax
     public function showTasks(){
-        return view('user.tasks.index');
+        $taskgroups = TaskGroup::whereHas('tasks',function($q){$q->where('user_id',Auth::user()->id);})->get();
+
+        return view('user.tasks.index',compact('taskgroups'));
     }
 
     public function getTasks(){
@@ -106,13 +108,14 @@ class TaskController extends Controller
     public function updateTask(Request $request){
 
         $user = Auth::user();
-        $t = $user->tasks->where('id','=',$request->taskid)->first();
-        if($t->pivot->completed){
-            $user->tasks()->updateExistingPivot($request->taskid,['status'=>false,'completed_at'=>null]);
+        $task = $user->tasks->where('id','=',$request->taskid)->first();
+        if($task->status){
+            $task->status = false;
         }
         else{
-            $user->tasks()->updateExistingPivot($request->taskid,['status'=>true,'completed_at'=>Carbon::now()]);
+            $task->status = true;
         }
+        $task->save();
         return response()->json(['status'=>'success']);
     }
 }

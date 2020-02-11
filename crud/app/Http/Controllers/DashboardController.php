@@ -20,25 +20,14 @@ class DashboardController extends Controller
 
     public function index(){
         
-        $users = User::whereHas(
-            'role', function($q){
-                $q->where('name', 'user');
-            }
-        )->get();
+        // $users = User::whereHas(
+        //     'role', function($q){
+        //         $q->where('name', 'user');
+        //     }
+        // )->get();
 
         if(Gate::allows('view-report')){
-            // foreach($users as $user){
-            //     //dd($user);
-            //     $total = 0;
-            //     $completed = 0;
-            //     foreach($user->tasks as $task){
-            //         $total++;
-            //         if($task->pivot->completed){
-            //             $completed++;
-            //         }
-            //     }
-            //     $
-            // }
+           
             
             return view('admin.dashboard',compact('users'));
         }

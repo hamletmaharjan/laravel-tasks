@@ -80,7 +80,8 @@ Route::middleware('auth')->group(function(){
 	Route::get('/tasks/all','TaskController@getTasks')->name('user.task.getall');
 	Route::post('/task/update','TaskController@updateTask')->name('user.task.update');
 
-	Route::get('/taskgroups','TaskGroupController@getAll')->name('user.taskgroup.getall');
+	
+	Route::get('/taskgroups/all','TaskGroupController@getAll')->name('user.taskgroup.getall');
 
 });
 
