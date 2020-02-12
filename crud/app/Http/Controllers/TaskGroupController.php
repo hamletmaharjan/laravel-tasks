@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\TaskGroup;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\HamsNotification;
+use Carbon\Carbon;
 
 class TaskGroupController extends Controller
 {
+	use Notifiable;
     //
 
     public function index(){
@@ -43,7 +47,15 @@ class TaskGroupController extends Controller
 
     //for ajax
     public function getAll(){
+    	$user = Auth::user();
+    	
     	$taskgroups = TaskGroup::whereHas('tasks',function($q){$q->where('user_id',Auth::user()->id);})->get();
+    	// foreach($taskgroups as $taskgroup){
+    	// 	if(Carbon::parse($taskgroup->due_at)->isTomoroow()){
+    	// 		return 'notification';
+    	// 		$user->notify(new HamsNotification($taskgroup));
+    	// 	}
+    	// }
         //return $taskgroups;
 
         return response()->json(['taskgroups'=>$taskgroups]);

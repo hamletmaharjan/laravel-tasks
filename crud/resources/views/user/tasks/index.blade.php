@@ -34,6 +34,9 @@ $(document).ready(function(){
         }
     });
 
+     $.get("{{route('user.taskgroup.getall')}}",function(data){
+        console.log(data);
+     });
     // function loadTasks(){
     //     $.get("{{route('user.taskgroup.getall')}}",function(data){
     //         console.log(data);
