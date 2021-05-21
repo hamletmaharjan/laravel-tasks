@@ -11,7 +11,7 @@
         <ul>
         @foreach($taskgroup->tasks as $task)
             <li>
-                <input type="checkbox"  name="task[]" value="{{$task->id}}" onclick="updateTask({{$task->id}})"></input>
+                <input type="checkbox"  name="task[]" value="{{$task->id}}" onclick="updateTask({{$task->id}})" @if($task->status)checked @endif></input>
                 <label>{{$task->title}}</label>
             </li>
         @endforeach
